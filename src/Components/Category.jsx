@@ -8,10 +8,18 @@ import slide5 from '../home/slide5.jpg'
 
 import 'swiper/css';
 import 'swiper/css/pagination';
+import SectionTitle from './SectionTitle/SectionTitle';
 
 const Category = () => {
     return (
              <div>
+        <SectionTitle 
+        subHeading={"---From 11:00am to 10:00pm---"}
+        heading={"ORDER ONLINE"}
+        />
+
+
+
                <Swiper
         slidesPerView={4}
         spaceBetween={30}
