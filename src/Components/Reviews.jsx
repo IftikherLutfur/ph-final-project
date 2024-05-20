@@ -3,6 +3,9 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import { Navigation } from 'swiper/modules';
+import { Rating } from '@smastrom/react-rating'
+
+import '@smastrom/react-rating/style.css'
 
 const Reviews = () => {
     const [reviews, setReviews] = useState([])
@@ -21,6 +24,11 @@ const Reviews = () => {
         reviews.map(review=><SwiperSlide key={review._id}>
             
             <div className="text-center">
+           <div className="lg:mx-[480px]"> 
+           <Rating 
+           style={{ maxWidth: 250 }} 
+           value={review.rating} 
+           readOnly /></div>
            <p>{review.details}</p>
            <h1 className="text-xl font-bold">{review.name}</h1>
             </div>
