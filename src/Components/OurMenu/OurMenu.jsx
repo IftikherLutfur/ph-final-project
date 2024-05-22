@@ -12,12 +12,12 @@ import drink from '../../../src/home/Prime-Drink-Review--Science-Backed-Insights
 
 const OurMenu = () => {
     const [menu] = useMenu();
-    const deserts = menu.filter(item => item.category === "dessert")
-    const salad = menu.filter(item => item.category === "salad")
-    const drinks = menu.filter(item => item.category === "drinks")
-    const soup = menu.filter(item => item.category === "soup")
-    const offered = menu.filter(item => item.category === "offered")
-    const pizza = menu.filter(item => item.category === "pizza")
+    const deserts = menu.filter(items => items.category === "dessert")
+    const salad = menu.filter(items => items.category === "salad")
+    const drinks = menu.filter(items => items.category === "drinks")
+    const soup = menu.filter(items => items.category === "soup")
+    const offered = menu.filter(items => items.category === "offered")
+    const pizza = menu.filter(items => items.category === "pizza")
 
     return (
         <div>
@@ -33,7 +33,7 @@ const OurMenu = () => {
             {/* deserts */}
             <MenuCategory
             item={deserts}
-            title={"deserts"}
+            title={"dessert"}
             description={"Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."}
             coverImg={desert}
             />
