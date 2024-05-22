@@ -5,12 +5,13 @@ import Navbar from "./Shared/Navbar";
 const Root = () => {
     const location = useLocation()
     console.log(location);
-    const isLoggedIn = location.pathname.includes('/login')
+    const isLoggedIn = location.pathname.includes('/login') ||
+     location.pathname.includes( '/register')
     return (
         <div>
-            {isLoggedIn || <Navbar></Navbar>}
+            {isLoggedIn|| <Navbar></Navbar>}
             <Outlet></Outlet>
-            <Footer></Footer>
+           {isLoggedIn || <Footer></Footer>}
         </div>
     );
 };

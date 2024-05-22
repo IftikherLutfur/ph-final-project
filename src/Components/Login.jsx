@@ -1,20 +1,14 @@
-import { useEffect, useRef, useState } from 'react';
+import {  useContext, useState } from 'react';
 import logForm from '../../src/home/authentication2.png'
-import { loadCaptchaEnginge, LoadCanvasTemplate, LoadCanvasTemplateNoReload, validateCaptcha } from 'react-simple-captcha';
-import { Value } from 'sass';
+import { AuthContext } from './AuthProvider/AuthPRovider';
+import { useNavigate } from 'react-router-dom';
 
 
 const Login = () => {
 
-    const captchaRef = useRef(null)
+    const {login} = useContext(AuthContext)
+    const navigate = useNavigate()
     const [show, setShow] = useState(false)
-    const [disable, setDisable] = useState(true)
-
-    useEffect(()=>{
-        loadCaptchaEnginge(6); 
-    },[])
-
-   
 
     const handleLogin = event =>{
         event.preventDefault()
@@ -22,35 +16,29 @@ const Login = () => {
         const email = form.email.value;
         const password = form.password.value;
        console.log(email, password);
+
+       login(email, password)
+       .then(result=>{
+        console.log(result.user);
+        navigate('/')
+       })
+       .catch(result=>{
+        console.log(result.user);
+       })
+
     }
-    const handleValidate = () =>{
-        const user_captcha_value = captchaRef.current.value;
-        if(validateCaptcha(user_captcha_value)==true){
-            alert('Captcha Matched')
-            setDisable(false)
-        } 
-        else{
-            alert('Captcha dose not matched')
-            setDisable(true)
-        }
-        }
+  
 
 
     return (
         <div>
-<div className="flex w-full max-w-sm mx-auto overflow-hidden rounded-lg shadow-lg bg-white lg:max-w-4xl">
+<div className="flex w-full max-w-sm mx-auto overflow-hidden rounded-lg shadow-lg bg-white lg:max-w-4xl pt-11">
     <div className="hidden bg-cover lg:block ">
         <img src={logForm} alt="" />
     </div>
 
     <div className="w-full px-6 py-8 md:px-8 lg:w-1/2">
-        <div className="flex justify-center mx-auto">
-            <img className="w-auto h-7 sm:h-8" src={logForm} alt=""/>
-        </div>
-
-        <p className="mt-3 text-xl text-center text-gray-600 dark:text-gray-200">
-            Welcome back!
-        </p>
+    
 
         <a href="#" className="flex items-center justify-center mt-4 text-gray-600 transition-colors duration-300 transform border rounded-lg dark:border-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600">
             <div className="px-4 py-2">
@@ -62,7 +50,7 @@ const Login = () => {
                 </svg>
             </div>
 
-            <span className="w-5/6 px-4 py-3 font-bold text-center">Sign in with Google</span>
+            <span className=" mt-16 w-5/6 px-4 py-3 font-bold text-center">Sign in with Google</span>
         </a>
 
         <div className="flex items-center justify-between mt-4 ">
@@ -88,9 +76,9 @@ const Login = () => {
             name='password'
             className="block w-full px-4 py-2 text-gray-700 bg-white border rounded-lg dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300" 
             type={show ? "text":"password" }/>
-            <button className='relative bottom-8 left-[280px] text-white' onClick={()=>setShow(!show)}>
+            <span className='relative bottom-8 left-[280px] text-white' onClick={()=>setShow(!show)}>
                 {show ? "Hide" : "Show"}
-                </button>
+                </span>
         <div className="flex justify-between">
                
                 <a href="#" className="text-xs text-gray-500 dark:text-black hover:underline">Forget Password?</a>
@@ -98,24 +86,8 @@ const Login = () => {
         
         </div>
 
-
-        
-        <div className="mt-4">
-            
-            <label className="block mb-2 text-sm font-medium dark:text-black" ><LoadCanvasTemplate /></label>
-            <input id="loggingPassword"
-            name='captcha'
-            ref={captchaRef}
-            className="block w-full px-4 py-2 text-gray-700 bg-white border rounded-lg dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300" type="text" />
-            <button onClick={handleValidate} className=" btn w-full btn-xs btn-outline">validate</button>
-        <div className="flex justify-between">
-            </div>
-        
-        </div>
-
         <div className="mt-6">
             <button
-            disabled={disable}
             className="w-full px-6 py-3 text-sm bg-pink-400 rounded-lg ">
                 Sign In
             </button>
