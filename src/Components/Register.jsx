@@ -4,6 +4,7 @@ import logForm from '../../src/home/authentication2.png'
 import { AuthContext } from './AuthProvider/AuthPRovider';
 import { useNavigate } from 'react-router-dom';
 
+
 const Register = () => {
 
     const {signUp,update} = useContext(AuthContext)
@@ -17,7 +18,17 @@ const Register = () => {
     }, [])
 
 
-
+    const handleValidate = () => {
+        const user_captcha_value = captchaRef.current.value;
+        if (validateCaptcha(user_captcha_value)) {
+            alert('Captcha Matched')
+            setDisable(false)
+        }
+        else {
+          alert('Captcha dose not matched')
+          setDisable(true)
+        }
+    }
     const handleLogin = event => {
         event.preventDefault()
         const form = event.target;
@@ -30,10 +41,11 @@ const Register = () => {
         signUp(email,password)
         .then(result=>{
             console.log(result.user);
+            navigate('/')
             update(name, image)
             .then(result=>{
                 console.log(result.user);
-                navigate('/')
+                
             })
             .catch(error=>{
     console.log(error);
@@ -44,17 +56,7 @@ const Register = () => {
             console.log(error);
         })
     }
-    const handleValidate = () => {
-        const user_captcha_value = captchaRef.current.value;
-        if (validateCaptcha(user_captcha_value) == true) {
-            alert('Captcha Matched')
-            setDisable(false)
-        }
-        else {
-            alert('Captcha dose not matched')
-            setDisable(true)
-        }
-    }
+   
 
 
     return (
@@ -89,21 +91,22 @@ const Register = () => {
                             <label className="block mb-2 text-sm font-medium  ">Photo</label>
                             <input
                                 name='image'
-                                className="block w-full px-4 py-2 text-gray-700 bg-white border rounded-lg dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300" type="text" />
+                                className="block w-full px-4 py-2 text-gray-700 bg-white border rounded-lg dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300" type="url" />
                         </div>
 
 
                         <div className="mt-4">
                             <label className="block mb-2 text-sm font-medium  ">Email Address</label>
-                            <input
-                                name='email'
-                                className="block w-full px-4 py-2 text-gray-700 bg-white border rounded-lg dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300" type="email" />
+          <input
+              name='email'
+              className="block w-full px-4 py-2 text-gray-700 bg-white border rounded-lg dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300" type="email" />
                         </div>
 
                         <div className="mt-4">
                             <label className="block mb-2 text-sm font-medium dark:text-black" >Password</label>
                             <input
                                 name='password'
+                              
                                 className="block w-full px-4 py-2 text-gray-700 bg-white border rounded-lg dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300"
                                 type={show ? "text" : "password"} />
                             <span className='relative bottom-8 left-[280px] text-white' onClick={() => setShow(!show)}>
@@ -125,7 +128,7 @@ const Register = () => {
                                 name='captcha'
                                 ref={captchaRef}
                                 className="block w-full px-4 py-2 text-gray-700 bg-white border rounded-lg dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300" type="text" />
-                            <button onClick={handleValidate} className=" btn w-full btn-xs btn-outline">validate</button>
+                            <span onClick={handleValidate} className=" btn w-full btn-xs btn-outline">validate</span>
                             <div className="flex justify-between">
                             </div>
 

@@ -24,7 +24,7 @@ import Register from "./Components/Register";
         },
         {
           path:'/order/:category',
-          element:<Order></Order>
+          element:<Order/>
         },
         {
           path:'login',

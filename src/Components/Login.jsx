@@ -1,14 +1,18 @@
 import {  useContext, useState } from 'react';
 import logForm from '../../src/home/authentication2.png'
 import { AuthContext } from './AuthProvider/AuthPRovider';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import toast, { Toaster } from 'react-hot-toast';
 
 
 const Login = () => {
 
     const {login} = useContext(AuthContext)
-    const navigate = useNavigate()
     const [show, setShow] = useState(false)
+    const navigate = useNavigate();
+    const location = useLocation()
+
+    const formPath = location?.state?.form?.pathname || '/';
 
     const handleLogin = event =>{
         event.preventDefault()
@@ -20,7 +24,8 @@ const Login = () => {
        login(email, password)
        .then(result=>{
         console.log(result.user);
-        navigate('/')
+        toast.success('Successfully toasted!')
+        navigate(formPath, {replace:true})
        })
        .catch(result=>{
         console.log(result.user);
@@ -92,6 +97,7 @@ const Login = () => {
                 Sign In
             </button>
         </div>
+                <Toaster/>
 
 </form>
 
