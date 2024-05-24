@@ -13,6 +13,7 @@ const Login = () => {
     const location = useLocation()
 
     const formPath = location?.state?.form?.pathname || '/';
+    console.log('state in the location login page', location.state);
 
     const handleLogin = event =>{
         event.preventDefault()

@@ -32,7 +32,7 @@ const Order = () => {
             </Helmet>
             <Cover img={banner} title={'OUR SHOP'} description={'Would you like to try a dish?'} />
             <Tabs defaultIndex={tabIndex} onSelect={(index) => setTabIndex(index)}>
-                <TabList className='text-center mt-20 mb-10 text-xl font-bold'>
+                <TabList className='mx-10 gap-5 text-center mt-30 mb-10 text-xl font-bold'>
                     <Tab>SALAD</Tab>
                     <Tab>PIZZA</Tab>
                     <Tab>SOUPS</Tab>
@@ -42,27 +42,37 @@ const Order = () => {
 
                 {/* Salad */}
                 <TabPanel>
-                   <OrderDetails title={salad}/>
+                  <div className='mx-10 gap-5 grid grid-cols-3'>
+                  {salad.map(title=><OrderDetails key={title._id} title={title} />)}
+                  </div>
                 </TabPanel>
 
                 {/* Pizza */}
                 <TabPanel>
-                <OrderDetails title={pizza}/>
+                <div className='mx-10 gap-5 grid grid-cols-3'>
+                  {pizza.map(title=><OrderDetails key={title._id} title={title} />)}
+                  </div>
                 </TabPanel>
 
                 {/* Soups */}
                 <TabPanel>
-                    <OrderDetails title={soup} />
+                <div className='mx-10 gap-5 grid grid-cols-3'>
+                  {soup.map(title=><OrderDetails key={title._id} title={title} />)}
+                  </div>
                 </TabPanel>
 
                 {/* Deserts */}
                 <TabPanel>
-                <OrderDetails title={deserts}/>
+                <div className='mx-10 gap-5 grid grid-cols-3'>
+                  {deserts.map(title=><OrderDetails key={title._id} title={title} />)}
+                  </div>
                 </TabPanel>
 
                 {/* Drinks */}
                 <TabPanel>
-                <OrderDetails title={drinks}/>
+                <div className='mx-10 gap-5 grid grid-cols-3'>
+                  {drinks.map(title=><OrderDetails key={title._id} title={title} />)}
+                  </div>
                 </TabPanel>
 
 
