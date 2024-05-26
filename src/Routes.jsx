@@ -7,6 +7,9 @@ import OurMenu from "./Components/OurMenu/OurMenu";
 import Order from "./Components/Order/Order";
 import Login from "./Components/Login";
 import Register from "./Components/Register";
+import Dashboard from "./Components/Dashboard/Dashboard";
+import UserCarts from "./Components/Dashboard/Carts/UserCarts";
+import Private from "./Components/Private/Private";
 
 
   const router = createBrowserRouter([
@@ -36,6 +39,17 @@ import Register from "./Components/Register";
         }
       ]
     },
+
+    {
+      path:'dashboard',
+      element:<Private><Dashboard/></Private> ,
+      children:[
+        {
+          path:'/dashboard', 
+          element:<UserCarts/>
+        }
+      ]
+    }
   ]);
 
   export default router;

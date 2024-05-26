@@ -3,11 +3,16 @@ import { LoadCanvasTemplate, loadCaptchaEnginge, validateCaptcha } from 'react-s
 import logForm from '../../src/home/authentication2.png'
 import { AuthContext } from './AuthProvider/AuthPRovider';
 import { useNavigate } from 'react-router-dom';
+import UseAxiosPublic from '../Hooks/UseAxiosPublic';
+import { FcGoogle } from "react-icons/fc";
+import GoogleHook from '../Hooks/GoogleHook';
 
 
 const Register = () => {
 
+    const axiosPublic = UseAxiosPublic()
     const {signUp,update} = useContext(AuthContext)
+    const handleGoogle = GoogleHook()
     const navigate = useNavigate()
     const captchaRef = useRef(null)
     const [show, setShow] = useState(false)
@@ -41,8 +46,20 @@ const Register = () => {
         signUp(email,password)
         .then(result=>{
             console.log(result.user);
-            navigate('/')
+            
+            const userInfo = {
+                name:name,
+                email:email
+                
+            }
+            axiosPublic.post('/users', userInfo)
+            .then(res =>{
+                if(res.data.insertedId){
+                    alert('User Information Added')
+                }
+            })
             update(name, image)
+            navigate('/')
             .then(result=>{
                 console.log(result.user);
                 
@@ -67,13 +84,16 @@ const Register = () => {
                 </div>
 
                 <div className="w-full px-6 py-8 md:px-8 lg:w-1/2">
+                    <div><button onClick={handleGoogle} type="button" className="relative w-full px-8 py-4 ml-4 overflow-hidden font-semibold rounded dark:bg-gray-800 dark:text-gray-50">
+                        <span className='flex gap-2 items-center text-center mx-12'>Login with Google <FcGoogle/></span>
+	<span className="absolute top-0 right-0 px-5 py-1 text-xs tracking-wider text-center uppercase whitespace-no-wrap origin-bottom-left transform rotate-45 -translate-y-full translate-x-1/3 dark:bg-violet-600">Social</span>
+</button></div>
 
                     <div className="flex items-center justify-between mt-4 ">
                         <span className="w-1/5 border-b dark:border-gray-600 lg:w-1/4"></span>
 
-                        <a href="#" className="text-xs text-center text-gray-500 uppercase  hover:underline">or login
-                            with email</a>
-
+                       <p>Login with social</p>
+                        
                         <span className="w-1/5 border-b dark:border-gray-400 lg:w-1/4"></span>
                     </div>
                     <form onSubmit={handleLogin}>

@@ -1,17 +1,18 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import UseAuth from "../Shared/UseAuth";
-import axios from "axios";
-import AxiosSecure, { axiosSecure } from "../../Hooks/AxiosSecure";
+import AxiosSecure from "../../Hooks/AxiosSecure";
+import UseCart from "../../Hooks/UseCart";
 
 const OrderDetails = ({ title }) => {
     const { image, name, price, recipe, _id } = title
     const navigate = useNavigate()
     const location = useLocation();
     const secureAxios = AxiosSecure()
+    const [, refetch] = UseCart();
 
     const { user } = UseAuth()
 
-    const handleAddFood = food => {
+    const handleAddFood = () => {
 
         if (user && user.email) {
 
@@ -22,11 +23,12 @@ const OrderDetails = ({ title }) => {
                 price,
                 image
             }
-            secureAxios.post('http://localhost:5000/carts', cartItem)
+            secureAxios.post('/carts', cartItem)
                 .then(res => {
                     console.log(res.data);
                     if(res.data.insertedId){
                         alert("Added")
+                        refetch();
                     }
                 })
 
@@ -50,7 +52,7 @@ const OrderDetails = ({ title }) => {
                          dark:text-gray-400">{recipe.slice(0, 80)}</p>
 
                         <div className='text-center mt-5'>
-                            <button onClick={() => handleAddFood()} className='btn bg-black
+                            <button onClick={ handleAddFood} className='btn bg-black
                         border-t-yellow-400 text-white border-t-4'>
                                 Add To Cart</button>
                         </div>
