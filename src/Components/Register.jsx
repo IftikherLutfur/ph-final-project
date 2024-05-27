@@ -49,7 +49,8 @@ const Register = () => {
             
             const userInfo = {
                 name:name,
-                email:email
+                email:email,
+                image:image
                 
             }
             axiosPublic.post('/users', userInfo)

@@ -10,6 +10,7 @@ import Register from "./Components/Register";
 import Dashboard from "./Components/Dashboard/Dashboard";
 import UserCarts from "./Components/Dashboard/Carts/UserCarts";
 import Private from "./Components/Private/Private";
+import AllUsers from "./Components/Dashboard/AllUsers/AllUsers";
 
 
   const router = createBrowserRouter([
@@ -45,8 +46,12 @@ import Private from "./Components/Private/Private";
       element:<Private><Dashboard/></Private> ,
       children:[
         {
-          path:'/dashboard', 
+          path:'cart', 
           element:<UserCarts/>
+        },
+        {
+          path:'users',
+          element:<AllUsers/>
         }
       ]
     }
