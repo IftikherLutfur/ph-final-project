@@ -8,6 +8,7 @@ import { ImSpoonKnife } from "react-icons/im";
 import UseCart from "../../Hooks/UseCart";
 import { TiThMenu } from "react-icons/ti";
 import { BiBook } from "react-icons/bi";
+import useAdmin from "../../Hooks/useAdmin";
 
 
 const Dashboard = () => {
@@ -15,7 +16,8 @@ const Dashboard = () => {
 
     //TO DO: //
 
-    const isAdmin = true;
+    const [isAdmin] = useAdmin();
+    console.log('isAdmin',isAdmin);
 
     return (
         <div className="bg-slate-50">
@@ -26,7 +28,8 @@ const Dashboard = () => {
     <ul className=" menu space-y-4 uppercase">
 
     {
-        isAdmin ? <>
+        isAdmin ? 
+        <>
             <li>
             <NavLink to='cart'>
                <FaHome/> Admin Home
@@ -59,33 +62,33 @@ const Dashboard = () => {
         :
         <>
             <li>
-            <NavLink to='cart'>
+            <NavLink to='home'>
                <FaHome/> User Home
             </NavLink>
         </li>
         <li className="">
-            <NavLink to='cart'>
+            <NavLink to='reserve'>
                
                 <SlCalender/> Reservation
             </NavLink>
         </li>
         <li className="">
-            <NavLink to='cart'>
+            <NavLink to='payment'>
         <MdPayment/> Payment History
             </NavLink>
         </li>
         <li className="">
-            <NavLink to='/dashboard'>
+            <NavLink to='/dashboard/cart'>
         <FaCartShopping></FaCartShopping> My Cart ({cart.length})
             </NavLink>
         </li>
         <li className="">
-            <NavLink to='cart'>
+            <NavLink to='review'>
          <MdReviews/> Add Review
             </NavLink>
         </li>
         <li className="">
-            <NavLink to='cart'>
+            <NavLink to='booking'>
           <TbBrandBooking></TbBrandBooking> My Booking
             </NavLink>
         </li>
@@ -96,17 +99,17 @@ const Dashboard = () => {
 
         <div className="divider"></div> 
         <li className="">
-            <NavLink to='cart'>
+            <NavLink to='/'>
           <FaHome/> Home
             </NavLink>
         </li>
         <li className="">
-            <NavLink to='cart'>
+            <NavLink to='menu'>
           <TbMenu/> Menu
             </NavLink>
         </li>
         <li className="">
-            <NavLink to='cart'>
+            <NavLink to='contact'>
           <TbPhone/> Contact
             </NavLink>
         </li>
