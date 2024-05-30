@@ -17,8 +17,7 @@ const Dashboard = () => {
     //TO DO: //
 
     const [isAdmin] = useAdmin();
-    console.log('isAdmin',isAdmin);
-
+    
     return (
         <div className="bg-slate-50">
             <div className="flex "> 
@@ -36,8 +35,7 @@ const Dashboard = () => {
             </NavLink>
         </li>
         <li className="">
-            <NavLink to='cart'>
-               
+            <NavLink to='/dashboard/addItems'>
                 <ImSpoonKnife/> Add Item
             </NavLink>
         </li>

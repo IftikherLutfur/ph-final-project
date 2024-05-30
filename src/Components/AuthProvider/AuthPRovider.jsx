@@ -50,7 +50,7 @@ const AuthPRovider = ({ children }) => {
                     })
             }
             else {
-                // do something
+                // set token in local storage and set the user after user get token
                 localStorage.removeItem('access-token')
                 setUser(null)
                 setLoad(false)
