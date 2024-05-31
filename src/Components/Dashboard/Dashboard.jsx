@@ -40,7 +40,7 @@ const Dashboard = () => {
             </NavLink>
         </li>
         <li className="">
-            <NavLink to='cart'>
+            <NavLink to='/dashboard/manageItem'>
         <TiThMenu/> Manage Item
             </NavLink>
         </li>
