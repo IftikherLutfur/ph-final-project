@@ -3,6 +3,7 @@ import UseCart from "../../../Hooks/UseCart";
 
 import deleteButton from '../../../home/Group 87.png'
 import AxiosSecure from "../../../Hooks/AxiosSecure";
+import { Link } from "react-router-dom";
 
 
 const UserCarts = () => {
@@ -45,7 +46,10 @@ const UserCarts = () => {
             <div className="flex items-center justify-evenly  gap-20 mt-7 px-20 bg-white py-4">
             <div><h1 className="text-2xl font-bold">items:{cart.length}</h1></div>
             <div><h1 className="text-xl font-bold">Price:{totalPrice}</h1></div>
-            <div><button className="btn bg-yellow-600 text-white">Pay</button></div>
+            <div>
+             <Link to='/dashboard/payment'>
+             <button disabled={!cart.length} className="btn bg-yellow-600 text-white">Pay</button></Link>
+              </div>
             </div>
 
             <div className="overflow-x-auto">

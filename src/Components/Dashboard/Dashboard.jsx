@@ -1,5 +1,5 @@
 import { NavLink, Outlet } from "react-router-dom";
-import { FaHome } from "react-icons/fa";
+import { FaHome, FaPaypal } from "react-icons/fa";
 import { SlCalender } from "react-icons/sl";
 import { MdPayment, MdReviews } from "react-icons/md";
 import { FaCartShopping, FaPeopleGroup } from "react-icons/fa6";
@@ -70,14 +70,15 @@ const Dashboard = () => {
                 <SlCalender/> Reservation
             </NavLink>
         </li>
-        <li className="">
-            <NavLink to='payment'>
-        <MdPayment/> Payment History
-            </NavLink>
-        </li>
+        
         <li className="">
             <NavLink to='/dashboard/cart'>
         <FaCartShopping></FaCartShopping> My Cart ({cart.length})
+            </NavLink>
+        </li>
+        <li className="">
+            <NavLink to='/dashboard/paymentHistory'>
+        <FaPaypal/> Payment History
             </NavLink>
         </li>
         <li className="">

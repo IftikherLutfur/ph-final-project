@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import UseAxiosPublic from '../Hooks/UseAxiosPublic';
 import { FcGoogle } from "react-icons/fc";
 import GoogleHook from '../Hooks/GoogleHook';
+import toast, { Toaster } from 'react-hot-toast';
 
 
 const Register = () => {
@@ -26,11 +27,9 @@ const Register = () => {
     const handleValidate = () => {
         const user_captcha_value = captchaRef.current.value;
         if (validateCaptcha(user_captcha_value)) {
-            alert('Captcha Matched')
             setDisable(false)
         }
         else {
-          alert('Captcha dose not matched')
           setDisable(true)
         }
     }
@@ -46,7 +45,7 @@ const Register = () => {
         signUp(email,password)
         .then(result=>{
             console.log(result.user);
-            
+            toast.success("Sign Up Successful")
             const userInfo = {
                 name:name,
                 email:email,
@@ -55,9 +54,7 @@ const Register = () => {
             }
             axiosPublic.post('/users', userInfo)
             .then(res =>{
-                if(res.data.insertedId){
-                    alert('User Information Added')
-                }
+                console.log(res.data);
             })
             update(name, image)
             navigate('/')
@@ -161,6 +158,7 @@ const Register = () => {
                                 className="w-full px-6 py-3 text-sm bg-pink-400 rounded-lg ">
                                 Sign In
                             </button>
+                            <Toaster/>
                         </div>
 
                     </form>

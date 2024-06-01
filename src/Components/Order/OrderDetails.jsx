@@ -2,6 +2,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import UseAuth from "../Shared/UseAuth";
 import AxiosSecure from "../../Hooks/AxiosSecure";
 import UseCart from "../../Hooks/UseCart";
+import toast, { Toaster } from "react-hot-toast";
 
 const OrderDetails = ({ title }) => {
     const { image, name, price, recipe, _id } = title
@@ -27,7 +28,7 @@ const OrderDetails = ({ title }) => {
                 .then(res => {
                     console.log(res.data);
                     if(res.data.insertedId){
-                        alert("Added")
+                        toast.success(`${name} Add to my cart`)
                         refetch();
                     }
                 })
@@ -55,6 +56,7 @@ const OrderDetails = ({ title }) => {
                             <button onClick={ handleAddFood} className='btn bg-black
                         border-t-yellow-400 text-white border-t-4'>
                                 Add To Cart</button>
+                                <Toaster/>
                         </div>
 
                     </div>
